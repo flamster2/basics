@@ -1,19 +1,51 @@
+from random import randint
+
+print("Welcome to Rock, Paper, Scissors. Are you ready? Let's go!")
+
+options = ['rock', 'paper', 'scissors']
+
+game = True
 scorep1 = 0
 scorep2 = 0
+player1 = input('Please type your name: ')
+counter = 0
+rounds = int(input("Hi {}. How many rounds would you like to play? ".format(player1)))
 
-def rps(p1, p2):
-  global scorep1
-  global scorep2
-  beats = {'rock': 'scissors', 'scissors': 'paper', 'paper': 'rock'}
-  if beats[p1] == p2:
-    scorep1 += 1
-    print("Player 1 won!")
-  if beats[p2] == p1:
-    scorep2 += 1
-    print("Player 2 won!")
+print("{} rounds it is.".format(rounds))
+
+difficulty = input("Please choose your difficulty: easy or difficult? ")
+
+while counter <= rounds-1:
+
+  if difficulty == 'easy':
+
+
+    beats = {'rock': 'scissors', 'scissors': 'paper', 'paper': 'rock'}
+    
+    p1 = input("Choose: rock, paper, or scissors? ")
+
+    p2 = options[randint(0,2)]
+
+    #conditions
+    if p1 not in options:
+      print('Please make sure to select either "rock", "paper", or "scissors".')
+    elif beats[p1] == p2:
+      scorep1 += 1
+      counter +=1
+      print("{} won!".format(player1))
+    elif beats[p2] == p1:
+      scorep2 += 1
+      counter +=1
+      print("Computer won!")
+    else:
+      print("Draw!")
+      counter +=1
+    print('The score is {} {} : {} Computer'.format(player1, scorep1, scorep2))
+    #if user input == yes start a nother round, if no clear score board
   else:
-    print("Draw!")
-  print('The score is {} : {}'.format(scorep1, scorep2))
-  #if user input == yes start a nother round, if no clear score board
-
-rps('rock', 'paper')
+    print("Sorry, difficulty mode is not yet available. Let's try easy.")
+    difficulty = 'easy'
+if scorep1 > scorep2:
+  print("Well done! You beat Computer {} : {}!".format(scorep1, scorep2))
+else:
+  print("Ouch. Beaten by a bunch of 1s and 0s... you lost {} : {}.".format(scorep1, scorep2))
