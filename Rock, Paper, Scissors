@@ -4,6 +4,10 @@ print("Welcome to Rock, Paper, Scissors. Are you ready? Let's go!")
 
 options = ['rock', 'paper', 'scissors']
 
+p1rock = 0
+p1paper = 0
+p1scissors = 0
+
 game = True
 scorep1 = 0
 scorep2 = 0
@@ -16,19 +20,20 @@ draws = 0
 
 while game == True:
 
-  rounds = int(input("Hi {}. How many rounds would you like to play? ".format(player1)))
+  rounds = int(input("Ok {}. How many rounds would you like to play? ".format(player1)))
   if rounds == 0:
     print("There's no need to be like that. Come on, best of three!")
     rounds = 3
+  elif rounds ==1:
+    print("{} round it is.".format(rounds))
   else:
-    print("{} round it is.".format(rounds)) if rounds ==1 else "{} rounds it is.".format(rounds)
+    print("{} rounds it is.".format(rounds))
 
   difficulty = input("Please choose your difficulty: easy or difficult? ")
   
   while counter <= rounds-1:
 
     if difficulty == 'easy':
-
 
       beats = {'rock': 'scissors', 'scissors': 'paper', 'paper': 'rock'}
       
@@ -51,10 +56,49 @@ while game == True:
         print("Draw!")
         counter +=1
       print('The score is {} {} : {} Computer'.format(player1, scorep1, scorep2))
-      #if user input == yes start a nother round, if no clear score board
     else:
-      print("Sorry, difficulty mode is not yet available. Let's try easy.")
-      difficulty = 'easy'
+      print("Wow. Alright then, show RPS Bot what you've got!")
+
+      p1stats = [p1rock, p1paper, p1scissors]
+      p1stats.sort()
+
+      beats = {'rock': 'scissors', 'scissors': 'paper', 'paper': 'rock'}
+      
+      p1 = input("Choose: rock, paper, or scissors? ")
+      if p1 == 'rock':
+        p1rock +=1
+      elif p1 == 'paper':
+        p1paper +=1
+      else:
+        p1scissors +=1
+
+      if (p1rock > p1paper) and (p1rock > p1scissors):
+        p2 = 'paper'
+        print("Computer chose paper!")
+      elif (p1paper > p1rock) and (p1paper > p1scissors):
+        p2 = 'scissors'
+        print("Computer chose scissors!")
+
+      else:
+        p2 = 'rock'
+        print("Computer chose rock!")
+
+      #conditions
+      if p1 not in options:
+        print('Please make sure to select either "rock", "paper", or "scissors".')
+      elif beats[p1] == p2:
+        scorep1 += 1
+        counter +=1
+        print("{} won!".format(player1))
+      elif beats[p2] == p1:
+        scorep2 += 1
+        counter +=1
+        print("Computer won!")
+      else:
+        print("Draw!")
+        counter +=1
+      print('The score is {} {} : {} Computer'.format(player1, scorep1, scorep2))
+
   if scorep1 > scorep2:
     print("Well done! You beat Computer {} : {}!".format(scorep1, scorep2))
     p1wins += 1
@@ -65,7 +109,7 @@ while game == True:
     print("Seems we can't settle this in regular time... let's call it a draw?")
     draws += 1
   again = input("Want to have another go? ")
-  if again == 'Yes':
+  if again == 'yes':
     scorep1 = 0
     scorep2 = 0
     counter = 0  
