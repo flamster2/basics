@@ -1,0 +1,19 @@
+scorep1 = 0
+scorep2 = 0
+
+def rps(p1, p2):
+  global scorep1
+  global scorep2
+  beats = {'rock': 'scissors', 'scissors': 'paper', 'paper': 'rock'}
+  if beats[p1] == p2:
+    scorep1 += 1
+    print("Player 1 won!")
+  if beats[p2] == p1:
+    scorep2 += 1
+    print("Player 2 won!")
+  else:
+    print("Draw!")
+  print('The score is {} : {}'.format(scorep1, scorep2))
+  #if user input == yes start a nother round, if no clear score board
+
+rps('rock', 'paper')
